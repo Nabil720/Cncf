@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-service
+  labels:
+    app: employee-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employee-service
+  template:
+    metadata:
+      labels:
+        app: employee-service
+    spec:
+      containers:
+      - name: employee-service
+        image: nanil0034/kindergarten-registry-employee:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5003
+        env:
+        - name: SERVICE_NAME
+          value: "employee"
+        - name: VAULT_ADDR
+          value: "http://192.168.121.132:8200"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-service
+spec:
+  selector:
+    app: employee-service
+  ports:
+    - protocol: TCP
+      port: 5003
+      targetPort: 5003
+      nodePort: 30003
+  type: NodePort
