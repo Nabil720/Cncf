@@ -22,6 +22,9 @@ RUN apk --no-cache add ca-certificates
 # Copy the binary from builder stage
 COPY --from=builder /app/main .
 
+# Copy the .env file to the container
+COPY .env .env
+
 # Create non-root user
 RUN adduser -D -g '' appuser
 USER appuser
