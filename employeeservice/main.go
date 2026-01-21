@@ -16,7 +16,7 @@ func enableCors(w http.ResponseWriter) {
 }
 
 func main() {
-    // Step 1: Vault থেকে secrets লোড করো
+    // Step 1: Vault secrets load
     log.Println("Initializing Employee Service with Vault integration...")
     
     vaultClient, err := config.InitVaultClient()
@@ -40,7 +40,7 @@ func main() {
     log.Println("Successfully loaded configuration from Vault")
     log.Printf("Service port: %d", port)
 
-    // Step 2: Database connection (এখন Vault থেকে URI পাবে)
+    // Step 2: Database connection 
     os.Setenv("MONGODB_URI", mongoSecrets.URI)
     os.Setenv("DATABASE_NAME", mongoSecrets.Database)
 

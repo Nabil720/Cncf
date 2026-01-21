@@ -9,13 +9,13 @@ import EmployeeList from "./components/EmployeeList";
 import "./App.css";
 import { init as initApm } from '@elastic/apm-rum'
 
-// APM initialization
-const apm = initApm({
-  serviceName: 'kindergarten-frontend',
-  serverUrl: 'http://192.168.121.224:8200',
-  serviceVersion: '1.0.0',
-  environment: 'development'
-})
+// // APM initialization
+// const apm = initApm({
+//   serviceName: 'kindergarten-frontend',
+//   serverUrl: 'http://192.168.121.224:8200',
+//   serviceVersion: '1.0.0',
+//   environment: 'development'
+// })
 
 
 
