@@ -38,7 +38,7 @@ type ServiceConfig struct {
 func InitVaultClient() (*VaultConfig, error) {
     vaultAddr := os.Getenv("VAULT_ADDR")
     if vaultAddr == "" {
-        vaultAddr = "http://192.168.121.132:8200"
+        vaultAddr = "https://node.vault.intra/"
     }
 
     vaultToken := os.Getenv("VAULT_TOKEN")
