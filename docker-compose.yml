@@ -1,0 +1,148 @@
+# services:
+#   student-service:
+#     image: nanil0034/kindergarten-registry-student:${TAG:-latest}
+#     build: 
+#       context: ./studentservice
+#       dockerfile: Dockerfile
+#     ports:
+#       - "5001:5001"
+#     depends_on:
+#       - mongo
+#     environment:
+#       # - MONGODB_URI=${MONGODB_URI}
+#       # - DATABASE_NAME=${DATABASE_NAME}
+#       # - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
+#       # - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
+#       # - ELASTIC_APM_SERVICE_NAME=${ELASTIC_APM_SERVICE_NAME_STUDENT}
+
+#   teacher-service:
+#     image: nnanil0034/kindergarten-registry-teacher:${TAG:-latest}
+#     build: 
+#       context: ./teacherservice
+#       dockerfile: Dockerfile
+#     ports:
+#       - "5002:5002"
+#     depends_on:
+#       - mongo
+#     environment:
+#       # - MONGODB_URI=${MONGODB_URI}
+#       # - DATABASE_NAME=${DATABASE_NAME}
+#       # - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
+#       # - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
+#       # - ELASTIC_APM_SERVICE_NAME=${ELASTIC_APM_SERVICE_NAME_TEACHER}
+
+#   employee-service:
+#     image: nanil0034/kindergarten-registry-employee:${TAG:-latest}
+#     build: 
+#       context: ./employeeservice
+#       dockerfile: Dockerfile
+#     ports:
+#       - "5003:5003"
+#     depends_on:
+#       - mongo
+#     environment:
+#       # - MONGODB_URI=${MONGODB_URI}
+#       # - DATABASE_NAME=${DATABASE_NAME}
+#       # - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
+#       # - ELASTIC_APM_SECRET_TOKEN=${ELASTIC_APM_SECRET_TOKEN}
+#       # - ELASTIC_APM_SERVICE_NAME=${ELASTIC_APM_SERVICE_NAME_EMPLOYEE}
+
+#   frontend:
+#     image: nanil0034/kindergarten-registry-frontend:${TAG:-latest}
+#     build: ./frontend
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       # - ELASTIC_APM_SERVER_URL=${ELASTIC_APM_SERVER_URL}
+#     stdin_open: true
+#     tty: true
+
+#   mongo:
+#     image: mongo
+#     container_name: mongodb
+#     ports:
+#       - "27017:27017"
+#     environment:
+#       # MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+#       # MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+#       # MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+
+#     volumes:
+#       - mongo-data:/data/db
+
+# volumes:
+#   mongo-data:
+
+# Nabil Anto
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+services:
+  student-service:
+    image: nanil0034/kindergarten-registry-student:${TAG:-latest}
+    build: 
+      context: ./studentservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+
+  teacher-service:
+    image: nanil0034/kindergarten-registry-teacher:${TAG:-latest}
+    build: 
+      context: ./teacherservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "5002:5002"
+    depends_on:
+      - mongo
+
+  employee-service:
+    image: nanil0034/kindergarten-registry-employee:${TAG:-latest}
+    build: 
+      context: ./employeeservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "5003:5003"
+    depends_on:
+      - mongo
+
+  frontend:
+    image: nanil0034/kindergarten-registry-frontend:${TAG:-latest}
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
