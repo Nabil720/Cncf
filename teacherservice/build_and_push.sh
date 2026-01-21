@@ -6,7 +6,7 @@ DOCKER_USERNAME="nanil0034"
 DOCKER_PASSWORD="dckr_pat___**"
 
 IMAGE_NAME="nanil0034/kindergarten-registry-teacher"
-TAG="${TAG:-96}"
+TAG="${TAG:-95}"
 
 # ENV values
 VAULT_ADDR="http://192.168.121.132:8200"
