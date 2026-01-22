@@ -1,6 +1,6 @@
-# Kindergarten Service Deployment Guide
+# Application Service Deployment Guide
 
-This guide details the process for setting up and deploying the Kindergarten services (Student, Teacher, and Employee) using HashiCorp Vault for secret management and Docker for image building and pushing. The services will be deployed on Kubernetes using the provided Kubernetes manifest files.
+This guide details the process for setting up and deploying the Application services (Student, Teacher, and Employee) using HashiCorp Vault for secret management and Docker for image building and pushing. The services will be deployed on Kubernetes using the provided Kubernetes manifest files.
 
 
 ## Step 1: Enable and Configure Vault Secrets(ON Vault VM)
@@ -10,8 +10,12 @@ This guide details the process for setting up and deploying the Kindergarten ser
 Enable the KV (Key-Value) secrets engine at the path `kindergarten` and configure it:
 
 ```bash
+# Enable KV secrets engine at path "kindergarten" with version 2
 vault secrets enable -path=kindergarten -version=2 kv
+
+# Tune the "kindergarten" secrets engine with default TTL of 1 year and max TTL of 10 years
 vault secrets tune -default-lease-ttl=8760h -max-lease-ttl=87600h kindergarten/
+
 ```
 
 ```bash
@@ -44,9 +48,10 @@ vault kv put kindergarten/ports \
 
 
 ### Create Policies
-Create Vault policies for each service: student, teacher, and employee. These policies will give the services read-only access to the secrets in Vault.
+Create Vault policies for  student service. These policie will give the services read-only access to the secrets in Vault.
 
 ```bash
+# Define a policy for the student service that allows read access to specific paths in Vault
 echo 'path "kindergarten/data/mongodb" {
   capabilities = ["read"]
 }
@@ -65,6 +70,16 @@ path "kindergarten/data/ports" {
 
 
 
+# Write the student-policy to Vault using the configuration in student-policy.hcl
+vault policy write student-policy student-policy.hcl
+
+
+```
+
+
+Create Vault policies for the teacher and employee services. These policie will give the services read-only access to the secrets in Vault.
+```bash
+# Define a policy for the teacher service that allows read access to specific paths in Vault
 echo 'path "kindergarten/data/mongodb" {
   capabilities = ["read"]
 }
@@ -81,8 +96,14 @@ path "kindergarten/data/ports" {
   capabilities = ["read"]
 }' > teacher-policy.hcl
 
+# Write the teacher-policy to Vault using the configuration in teacher-policy.hcl
+vault policy write teacher-policy teacher-policy.hcl
 
+```
+Create Vault policies for the employee service. These policie will give the services read-only access to the secrets in Vault.
 
+```bash
+# Define a policy for the employee service that allows read access to specific paths in Vault
 echo 'path "kindergarten/data/mongodb" {
   capabilities = ["read"]
 }
@@ -98,14 +119,11 @@ path "kindergarten/data/services" {
 path "kindergarten/data/ports" {
   capabilities = ["read"]
 }' > employee-policy.hcl
-```
 
-
-```bash
-vault policy write student-policy student-policy.hcl
-vault policy write teacher-policy teacher-policy.hcl
+# Write the employee-policy to Vault using the configuration in employee-policy.hcl
 vault policy write employee-policy employee-policy.hcl
 ```
+
 
 ### Create Tokens for Each Service
 
@@ -134,7 +152,11 @@ Save the tokens for later use:
 
 
 
-## If you want to create EKS Cluster
+## If you want to create EKS Cluster Using eksctl
+Before you begin, ensure you have the following tools and configurations in place:
+ 1. eksctl (EKS Cluster Management Tool)
+ 2. kubectl (Kubernetes Command-Line Tool)
+ 3. AWS CLI (AWS Command-Line Interface)
 
 ```bash
 apiVersion: eksctl.io/v1alpha5
