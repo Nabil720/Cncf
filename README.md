@@ -29,7 +29,7 @@ vault kv put kindergarten/mongodb \
 # Elastic APM configuration
 vault kv put kindergarten/apm \
   server_url="http://192.168.121.224:8200" \
-  secret_token="thO5a5ISLcoTrogIcH8XljEPRL39uqoswl" \
+  secret_token="your_apm_access_tocken" \
   environment="production"
 
 # Service-specific APM names
@@ -183,7 +183,7 @@ availabilityZones:
 managedNodeGroups:
   - name: ng-general
     instanceTypes: 
-      - t3.medium 
+      - t3.large 
     minSize: 1
     maxSize: 6
     desiredCapacity: 1
