@@ -36,5 +36,4 @@ spec:
     - protocol: TCP
       port: 5003
       targetPort: 5003
-      nodePort: 30003
-  type: NodePort
+  type: ClusterIP

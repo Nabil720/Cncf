@@ -50,7 +50,7 @@ func main() {
         log.Fatal("Database connection failed:", err)
     }
 
-    // Step 3: HTTP routes setup করো
+    // Step 3: HTTP routes setup 
     http.HandleFunc("/emp/add-employee", func(w http.ResponseWriter, r *http.Request) {
         enableCors(w)
         if r.Method == http.MethodOptions {

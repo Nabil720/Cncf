@@ -16,7 +16,7 @@ func enableCors(w http.ResponseWriter) {
 }
 
 func main() {
-    // Step 1: Vault থেকে secrets লোড করো
+    // Step 1: Vault 
     log.Println("Initializing Teacher Service with Vault integration...")
     
     vaultClient, err := config.InitVaultClient()
@@ -40,7 +40,7 @@ func main() {
     log.Println("Successfully loaded configuration from Vault")
     log.Printf("Service port: %d", port)
 
-    // Step 2: Database connection (এখন Vault থেকে URI পাবে)
+    // Step 2: Database connection 
     os.Setenv("MONGODB_URI", mongoSecrets.URI)
     os.Setenv("DATABASE_NAME", mongoSecrets.Database)
 
@@ -50,7 +50,7 @@ func main() {
         log.Fatal("Database connection failed:", err)
     }
 
-    // Step 3: HTTP routes setup করো
+    // Step 3: HTTP routes setup
     http.HandleFunc("/tech/add-teacher", func(w http.ResponseWriter, r *http.Request) {
         enableCors(w)
         if r.Method == http.MethodOptions {
