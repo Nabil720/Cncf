@@ -21,10 +21,9 @@ spec:
         ports:
         - containerPort: 5002
         env:
-        - name: VAULT_ADDR
-          value: "http://192.168.121.132:8200"
-        - name: SERVICE_NAME
-          value: "teacher"
+        - name: VAULT_SKIP_VERIFY
+          value: "true"
+
 ---
 apiVersion: v1
 kind: Service

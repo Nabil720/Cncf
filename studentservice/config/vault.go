@@ -46,10 +46,9 @@ func InitVaultClient() (*VaultConfig, error) {
         return nil, fmt.Errorf("VAULT_TOKEN environment variable is required")
     }
 
-    config := &api.Config{
-        Address: vaultAddr,
-        Timeout: 10 * time.Second,
-    }
+    config := api.DefaultConfig()
+    config.Address = vaultAddr
+    config.Timeout = 10 * time.Second
 
     client, err := api.NewClient(config)
     if err != nil {
