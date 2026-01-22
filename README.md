@@ -131,10 +131,10 @@ Save the tokens for later use:
 * Employee token: hvs.CAE**NKRjA
 
 
-## Step 2: Build and Push Docker Images (ON Jump Host)
 
 
-### If you want to create EKS Cluster
+
+## If you want to create EKS Cluster
 
 ```bash
 apiVersion: eksctl.io/v1alpha5
@@ -193,7 +193,7 @@ managedNodeGroups:
 ```
 
 
-
+## Step 2: Build and Push Docker Images (ON Jump Host)
 
 
 First, clone the repository from GitHub to your local environment.
