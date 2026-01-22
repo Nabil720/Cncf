@@ -38,7 +38,7 @@ type ServiceConfig struct {
 func InitVaultClient() (*VaultConfig, error) {
     vaultAddr := os.Getenv("VAULT_ADDR")
     if vaultAddr == "" {
-        vaultAddr = "https://100.52.252.66:8200/"
+       return nil, fmt.Errorf("VAULT_ADDR environment variable is required")
     }
 
     vaultToken := os.Getenv("VAULT_TOKEN")
